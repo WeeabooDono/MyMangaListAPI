@@ -1,0 +1,24 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable func-names */
+const mongoose = require('mongoose');
+const { ObjectId } = require('mongoose').Types;
+
+const tokenSchema = new mongoose.Schema({
+	_userId: {
+		type: ObjectId,
+		required: true,
+		ref: 'User',
+	},
+	token: {
+		type: String,
+		required: true,
+	},
+	createdAt: {
+		type: Date,
+		required: true,
+		default: Date.now,
+		expires: 43200,
+	},
+});
+
+module.exports = mongoose.model('Token', tokenSchema);
