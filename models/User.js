@@ -2,6 +2,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
+const { STATUS, ROLE } = require('../config/globals');
+
 const salt = 10;
 
 const google = new mongoose.Schema({
@@ -38,7 +40,7 @@ const userSchema = mongoose.Schema({
 	roles: {
 		type: [String],
 		required: false,
-		default: ['USER'],
+		default: [ROLE.USER],
 	},
 	date: {
 		type: Date,
@@ -47,6 +49,11 @@ const userSchema = mongoose.Schema({
 	isVerified: {
 		type: Boolean,
 		default: false,
+	},
+	status: {
+		type: String,
+		default: STATUS[0],
+		enum: STATUS,
 	},
 	google: {
 		type: google,
