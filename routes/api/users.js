@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-underscore-dangle */
 const express = require('express');
 
@@ -104,17 +105,16 @@ router.post('/', (req, res) => {
 
 // PATCH /api/users
 router.patch('/', (req, res) => {
-	const { username, email } = req.body;
+	const {
+		username, email, email_old, status,
+	} = req.body;
+	const data = { email, status };
 	User.findOne({ email }).then((user) => {
-		if (user) res.json({ message: 'email' });
+		if (user && email !== email_old) res.json({ message: 'email' });
 		else {
 			User.updateOne(
 				{ username },
-				{
-					$set: {
-						email,
-					},
-				},
+				{ $set: data },
 			).then((response) => {
 				const updated = response.n !== 0;
 				if (updated) res.json({ message: 'success' });
