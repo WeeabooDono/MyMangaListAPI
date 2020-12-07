@@ -106,9 +106,9 @@ router.post('/', (req, res) => {
 // PATCH /api/users
 router.patch('/', (req, res) => {
 	const {
-		username, email, email_old, status,
+		username, email, email_old, status, roles,
 	} = req.body;
-	const data = { email, status };
+	const data = { email, status, roles };
 	User.findOne({ email }).then((user) => {
 		if (user && email !== email_old) res.json({ message: 'email' });
 		else {
