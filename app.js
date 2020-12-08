@@ -17,7 +17,7 @@ mongoose.set('useCreateIndex', true);
 
 dotenv.config();
 
-// Import Routes API
+// Import Routes APIs
 const mangasRouterAPI = require('./routes/api/mangas');
 const usersRouterAPI = require('./routes/api/users');
 const oauth2RouterAPI = require('./routes/api/oauth2');
